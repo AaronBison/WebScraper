@@ -13,6 +13,8 @@ const interval = 1800000;
 
 const observableElement = '.pricing-block'
 
+const path = 'C:/Users/Lenovo/OneDrive - Bayer Construct zRt/Documents/IPhoneXR_log.txt'
+
 const app = express()
 let price = 0;
 
@@ -29,8 +31,7 @@ function scraping() {
 }
 
 function updateFile() {
-    fs.open('IPhoneXR_log.txt', 'a', 666, function (e, id) {
-        const t = new Date();
+    fs.open(path, 'a', 666, function (e, id) {
 
         const date = ('0' + t.getDate()).slice(-2);
         const month = ('0' + (t.getMonth() + 1)).slice(-2);
@@ -41,7 +42,8 @@ function updateFile() {
 
         fs.write(id, time + price + "\r\n", null, 'utf8', function () {
             fs.close(id, function () {
-                console.log('File was updated with: ' + price);
+                console.log("\x1b[0m", 'File was updated with: ');
+                console.log("\x1b[32m", price);
             });
         })
     });
