@@ -30,8 +30,16 @@ function scraping() {
 
 function updateFile() {
     fs.open('IPhoneXR_log.txt', 'a', 666, function (e, id) {
+        const t = new Date();
 
-        fs.write(id, new Date() + price + "\r\n", null, 'utf8', function () {
+        const date = ('0' + t.getDate()).slice(-2);
+        const month = ('0' + (t.getMonth() + 1)).slice(-2);
+        const year = t.getFullYear();
+        const hours = ('0' + t.getHours()).slice(-2);
+        const minutes = ('0' + t.getMinutes()).slice(-2);
+        const time = `${date}/${month}/${year} - ${hours}:${minutes}`;
+
+        fs.write(id, time + price + "\r\n", null, 'utf8', function () {
             fs.close(id, function () {
                 console.log('File was updated with: ' + price);
             });
